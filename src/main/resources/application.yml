@@ -4,9 +4,9 @@ server:
     context-path: /master
 spring:
   application:
-    name: login-service
+    name: masterdata-service
   datasource:
-    url: jdbc:mysql://localhost:3306/master?CreateDatabaseIfNotExist=true
+    url: jdbc:mysql://localhost:3306/master
     username: root
     password: root
   jpa:
@@ -20,3 +20,12 @@ spring:
           lob:
             non_contextual_creation: true
     show-sql: true
+eureka:
+  instance:
+    instance-id: ${spring.application.name}:${random.uuid}
+    hostname: localhost
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://${eureka.instance.hostname}:8761/eureka
